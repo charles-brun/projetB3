@@ -3,10 +3,12 @@
 #include "../../Utils/Factory.h"
 #include "../Systems/EntityManager.h"
 #include "../Components/Transform.h"
+#include "../Systems/InputManager.h"
 
 Entity::Entity()
 {
     SEntityManager::Get()->NewEntityCreated.Bind(this, &Entity::OnNewEntityCreate);
+    
     AddComponent(CTransform::StaticClass()->GetId());
 }
 
