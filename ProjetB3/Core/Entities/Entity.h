@@ -12,7 +12,7 @@ public:
     void Draw(const float& deltaTime);
     //void OnNewEntityCreate(int ID);
     virtual void Initialize();
-    void AddComponent(const int& classID);
+    virtual void AddComponent(const int& classID);
     Component* GetComponent(const int& classID) const;
     ~Entity();
     int GetSceneID() const { return sceneID; }
