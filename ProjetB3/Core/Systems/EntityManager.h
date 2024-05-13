@@ -6,9 +6,6 @@ class SEntityManager: Singleton
 {
 public:
     inline DECLARE_SINGLETON(SEntityManager)
-    
-    DECLARE_DELEGATE(FEntityCreation, int)
-    FEntityCreation NewEntityCreated;
-
-    void CreateNewEntity();
+    static void Update(const float& deltaTime);
+    static void Draw(const float& deltaTime);
 };

@@ -1,14 +1,11 @@
 ﻿#include "Entity.h"
 #include "../../Utils/ClassManager.h"
 #include "../../Utils/Factory.h"
-#include "../Systems/EntityManager.h"
 #include "../Components/Transform.h"
 #include "../Systems/InputManager.h"
 
 Entity::Entity()
 {
-    SEntityManager::Get()->NewEntityCreated.Bind(this, &Entity::OnNewEntityCreate);
-    
     AddComponent(CTransform::StaticClass()->GetId());
 }
 
@@ -35,13 +32,12 @@ Component* Entity::GetComponent(const int& classID) const
     return components.find(classID)->second;
 }
 
-void Entity::Update(float deltaTime)
+void Entity::Update(const float& deltaTime)
 {
 }
 
-void Entity::OnNewEntityCreate(int ID)
+void Entity::Draw(const float& deltaTime)
 {
-    //called on EntityManager signal
 }
 
 Entity::~Entity()
