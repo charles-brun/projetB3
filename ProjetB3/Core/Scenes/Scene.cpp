@@ -1,8 +1,6 @@
 ﻿#include "Scene.h"
 
-void Scene::Load()
-{
-}
+void Scene::Load() {}
 
 Entity* Scene::GetEntity(const int& sceneID) const
 {
@@ -23,6 +21,7 @@ int Scene::AddEntity(Entity* entity)
             sceneID++;
         } while (entities.contains(sceneID));
         entity->SetSceneID(sceneID);
+        entity->Initialize();
         entities.insert(std::pair<int, Entity*>(sceneID, entity));
     }
     return sceneID;

@@ -2,12 +2,13 @@
 #include <map>
 #include <string>
 #include <SFML/Graphics.hpp>
+#include "../Entities/Actor.h"
 #include "../Entities/Player.h"
 #include "../Entities/Block.h"
 #include "../../Utils/ClassManager.h"
 #include "../../Utils/Singleton.h"
 
-class SAssetManager: Singleton
+class SAssetManager
 {
 public:
     inline DECLARE_SINGLETON(SAssetManager)

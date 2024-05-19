@@ -1,21 +1,5 @@
 #include "ClassManager.h"
 
-ClassManager* ClassManager::Instance = nullptr;
-
-ClassManager* ClassManager::Get()
-{
-    if (Instance == nullptr)
-    {
-        Instance = new ClassManager();
-    }
-    return Instance;
-}
-
-void ClassManager::Reset()
-{
-    delete Instance;
-}
-
 ClassType* ClassManager::GetClass(const std::string& className, ClassType* parentClass)
 {
     for (auto existingClass: classTypes)

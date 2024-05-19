@@ -1,9 +1,9 @@
 ﻿#pragma once
 #include "../../Utils/Singleton.h"
 
-class SUIManager: Singleton
+class SUIManager
 {
 public:
     inline DECLARE_SINGLETON(SUIManager)
-    static void Update();
+    void Update(const float& deltaTime);
 };

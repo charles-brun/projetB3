@@ -1,13 +1,15 @@
 #include "Factory.h"
-
 #include "../Core/Components/AnimatedSprite.h"
 #include "../Core/Components/BoundingBox.h"
 #include "../Core/Components/Physics.h"
 #include "../Core/Entities/Block.h"
 #include "../Core/Entities/Player.h"
 #include "../Core/Components/Transform.h"
+#include "../Core/Entities/Threat.h"
 #include "../Core/Scenes/GameScene.h"
 #include "../Core/Scenes/MenuScene.h"
+
+// TODO: Make polymorphic
 
 Component* Factory::CreateComponent(const int& classId)
 {
@@ -32,6 +34,7 @@ Component* Factory::CreateComponent(const int& classId)
     {
         component = new CTransform();
     }
+    allObjects.push_back(component);
     return component;
 }
 
@@ -46,25 +49,55 @@ Scene* Factory::CreateScene(const int& classID)
     {
         scene = new MenuScene();
     }
+    allObjects.push_back(scene);
     return scene;
 }
 
-EActor* Factory::SpawnActor(const int& classId, Vector2 startingPosition)
+UIElement* Factory::CreateUIElement(const int& classID)
 {
-    EActor* actor = nullptr;
+    UIElement* uiElement = nullptr;
+
+    allObjects.push_back(uiElement);
+    return uiElement;
+}
+
+Level* Factory::CreateLevel(const int& classID)
+{
+    Level* level = new Level();
+
+    allObjects.push_back(level);
+    return level;
+}
+
+Entity* Factory::SpawnEntity(const int& classId, Vector2 startingPosition)
+{
+    Entity* entity = nullptr;
     if (classId == EPlayer::StaticClass()->GetId())
     {
-        actor = new EPlayer();
+        entity = new EPlayer();
     }
     else if (classId == EBlock::StaticClass()->GetId())
     {
-        actor = new EBlock();
+        entity = new EBlock();
     }
-    CTransform* transform = dynamic_cast<CTransform*>(actor->GetComponent(CTransform::StaticClass()->GetId()));
-    if (transform == nullptr)
+    else if (classId == EThreat::StaticClass()->GetId())
+    {
+        entity = new EThreat();
+    }
+    allObjects.push_back(entity);
+    entity->Initialize();
+    if (entity->GetTransform() == nullptr)
     {
         return nullptr;
     }
-    transform->SetPosition(startingPosition);
-    return actor;
+    entity->GetTransform()->SetPosition(startingPosition);
+    return entity;
+}
+
+Factory::~Factory()
+{
+    for (BaseObject* baseObject: allObjects)
+    {
+        delete baseObject;
+    }
 }

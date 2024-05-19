@@ -2,7 +2,7 @@
 #include "../Entities/Entity.h"
 #include "../Game/BaseObject.h"
 
-class Scene: BaseObject
+class Scene: public BaseObject
 {
 public:
     DECLARE_CLASS(Scene, BaseObject)

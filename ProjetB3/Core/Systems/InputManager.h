@@ -7,7 +7,7 @@
 #include "../../Utils/Delegate.h"
 #include "../../Utils/Singleton.h"
 
-class SInputManager: Singleton
+class SInputManager
 {
 public:
     inline DECLARE_SINGLETON(SInputManager)
@@ -45,7 +45,7 @@ public:
         {
             return;
         }
-        inputActions.find(IAName)->second->inputEvent.Bind(instance, func);
+        inputActions.find(IAName)->second->inputEvent.Bind<T>(instance, func);
     }
     void HandleInput(sf::RenderWindow* mainWindow) const;
 };

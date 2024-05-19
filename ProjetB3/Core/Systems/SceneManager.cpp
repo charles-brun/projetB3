@@ -3,12 +3,12 @@
 
 Scene* SSceneManager::LoadScene(const int& classID)
 {
-    Scene* scene = Factory::CreateScene(classID);
-    scene->Load();
-    return scene;
+    currentScene = Factory::Get()->CreateScene(classID);
+    currentScene->Load();
+    return currentScene;
 }
 
-Scene* SSceneManager::ChangeScene(const int& classID) const
+Scene* SSceneManager::ChangeScene(const int& classID)
 {
     if (currentScene != nullptr)
     {

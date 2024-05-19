@@ -1,16 +1,42 @@
 ﻿#include "Player.h"
-#include "../Components/BoundingBox.h"
-#include "../Components/AnimatedSprite.h"
-#include "../Components/Physics.h"
+#include "DeathZone.h"
+#include "Threat.h"
 
-EPlayer::EPlayer()
+void EPlayer::Collide(int classID)
 {
-    AddComponent(CBoundingBox::StaticClass()->GetId());
-    AddComponent(CAnimatedSprite::StaticClass()->GetId());
-    AddComponent(CPhysics::StaticClass()->GetId());
+    EActor::Collide(classID);
+    if (classID == EDeathZone::StaticClass()->GetId() || classID == EThreat::StaticClass()->GetId())
+    {
+        threatCollided.BroadCast();
+    }
+    Stop();
 }
 
-void EPlayer::Initialize()
+void EPlayer::TouchGround(const bool& isGrounded)
 {
-    EActor::Initialize();
+    EActor::TouchGround(isGrounded);
+}
+
+void EPlayer::OnMoveLeft(SInputManager::KeyState keyState)
+{
+    if (keyState == SInputManager::Pressed)
+    {
+        GetPhysics()->AddImpulse(Vector2::GetDirection(Vector2::LEFT) * moveSpeed);
+    }
+}
+
+void EPlayer::OnMoveRight(SInputManager::KeyState keyState)
+{
+    if (keyState == SInputManager::Pressed)
+    {
+        GetPhysics()->AddImpulse(Vector2::GetDirection(Vector2::RIGHT) * moveSpeed);
+    }
+}
+
+void EPlayer::OnJump(SInputManager::KeyState keyState)
+{
+    if (keyState == SInputManager::Pressed)
+    {
+        GetPhysics()->AddImpulse(Vector2::GetDirection(Vector2::UP) * jumpForce);
+    }
 }

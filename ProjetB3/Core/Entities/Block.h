@@ -1,9 +1,9 @@
 ﻿#pragma once
-#include "Actor.h"
+#include "Entity.h"
 
-class EBlock: public EActor
+class EBlock: public Entity
 {
 public:
-    DECLARE_CLASS(EBlock, EActor)
+    DECLARE_CLASS(EBlock, Entity)
     EBlock() = default;
 };

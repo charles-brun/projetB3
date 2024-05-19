@@ -9,6 +9,31 @@ public:
 
 	Vector2() = default;
 	Vector2(float pX, float pY) : X(pX), Y(pY) {}
+	static Vector2 ZERO() { return {0, 0};}
+	
+	enum Direction
+	{
+		UP,
+		LEFT,
+		DOWN,
+		RIGHT,
+	};
+
+	static Vector2 GetDirection(Direction direction)
+	{
+		switch (direction)
+		{
+		case UP:
+			return {0, -1};
+		case LEFT:
+			return {-1, 0};
+		case DOWN:
+			return {0, 1};
+		case RIGHT:
+			return {1, 0};
+		}
+		return ZERO();
+	}
 
 	auto operator + (const Vector2& pVector) const
 	{
@@ -35,6 +60,12 @@ public:
 	auto operator * (const float& pFloat) const
 	{
 		return Vector2(X * pFloat, Y * pFloat);
+	}
+
+	void operator *= (const float& pFloat)
+	{
+		X *= pFloat;
+		Y *= pFloat;
 	}
 
 	auto operator / (const float& pFloat) const

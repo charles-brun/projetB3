@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "../../Utils/Singleton.h"
 
-class SGameManager: Singleton
+class SGameManager
 {
 public:
     inline DECLARE_SINGLETON(SGameManager)

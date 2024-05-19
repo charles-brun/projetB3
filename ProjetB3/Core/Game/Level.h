@@ -4,16 +4,19 @@
 #include "BaseObject.h"
 #include "../../Maths/Vector2.h"
 
-class Level: BaseObject
+class Level: public BaseObject
 {
 public:
     DECLARE_CLASS(Level, BaseObject)
     struct ActorData
     {
-        int* classID;
+        int classID;
         Vector2 startingPos;
+        ActorData(int pID, Vector2 pPos): classID(pID), startingPos(pPos) {}
     };
     std::vector<ActorData*> actors;
-    Level();
+    Level() = default;
+    // ADD loading from file
     void Initialize();
+    ~Level();
 };

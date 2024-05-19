@@ -31,6 +31,10 @@ void SInputManager::HandleInput(sf::RenderWindow* mainWindow) const
     sf::Event event;
     while(mainWindow->pollEvent(event))
     {
+        if (event.type == sf::Event::Closed)
+        {
+            mainWindow->close();
+        }
         if (event.type == sf::Event::KeyPressed)
         {
             if (keyBinds.contains(event.key.code))

@@ -1,9 +1,10 @@
 ﻿#pragma once
 #include "../../Utils/Singleton.h"
+#include <SFML/Graphics.hpp>
 
-class SystemManager: Singleton
+class SystemManager
 {
 public:
     inline DECLARE_SINGLETON(SystemManager)
-    static void Update(const float& deltaTime);
+    void Update(const float& deltaTime, sf::RenderWindow* mainWindow);
 };

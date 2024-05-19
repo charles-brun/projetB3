@@ -41,8 +41,9 @@ void UIElement::AddChild(UIElement* element)
         return;
     }
     this->changeVisibility.Bind(element, &UIElement::OnParentVisibilityChange);
-    this->changePosition.Bind(element, &UIElement::OnParentPositionChange);
-    this->changeSize.Bind(element, &UIElement::OnParentSizeChange);
+    this->changePosition.Bind(this, &UIElement::OnParentPositionChange);
+    this->changeSize.Bind(this, &UIElement::OnParentSizeChange);
+    
     childrenNodes.insert(std::pair<std::string, UIElement*>(element->name, element));
 }
 

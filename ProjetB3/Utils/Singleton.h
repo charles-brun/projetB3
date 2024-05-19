@@ -11,8 +11,3 @@ return Instance;\
 static void Reset(){\
 delete Instance;\
 }
-
-class Singleton
-{
-public:
-};

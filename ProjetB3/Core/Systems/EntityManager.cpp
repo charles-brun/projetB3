@@ -15,14 +15,3 @@ void SEntityManager::Update(const float& deltaTime)
         SSceneManager::Get()->currentScene->ClearEntities();
     }
 }
-
-void SEntityManager::Draw(const float& deltaTime)
-{
-    if (SSceneManager::Get()->currentScene != nullptr)
-    {
-        for (auto entity: SSceneManager::Get()->currentScene->GetEntities())
-        {
-            entity.second->Draw(deltaTime);
-        }
-    }
-}

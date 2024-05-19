@@ -4,13 +4,9 @@
 #include "../Components/Transform.h"
 #include "../Systems/InputManager.h"
 
-Entity::Entity()
-{
-    AddComponent(CTransform::StaticClass()->GetId());
-}
-
 void Entity::Initialize()
 {
+    AddComponent(CTransform::StaticClass()->GetId());
 }
 
 void Entity::AddComponent(const int& classID)
@@ -19,7 +15,7 @@ void Entity::AddComponent(const int& classID)
     {
         return;
     }
-    Component* component = Factory::CreateComponent(classID);
+    Component* component = Factory::Get()->CreateComponent(classID);
     components.insert(std::pair(classID, component));
 }
 
@@ -32,12 +28,21 @@ Component* Entity::GetComponent(const int& classID) const
     return components.find(classID)->second;
 }
 
-void Entity::Update(const float& deltaTime)
+CTransform* Entity::GetTransform() const
 {
+    if (GetComponent(CTransform::StaticClass()->GetId()) == nullptr)
+    {
+        return nullptr;
+    }
+    return dynamic_cast<CTransform*>(GetComponent(CTransform::StaticClass()->GetId()));
 }
 
-void Entity::Draw(const float& deltaTime)
+void Entity::Update(const float& deltaTime)
 {
+    for (auto component: components)
+    {
+        component.second->Update(deltaTime);
+    }
 }
 
 Entity::~Entity()

@@ -5,7 +5,7 @@
 #include "../../Utils/Delegate.h"
 #include "../Game/BaseObject.h"
 
-class UIElement: BaseObject
+class UIElement: public BaseObject
 {
 public:
     DECLARE_CLASS(UIElement, BaseObject)
@@ -15,7 +15,8 @@ public:
     ChangePosition changePosition;
     DECLARE_DELEGATE(ChangeSize, Vector2)
     ChangeSize changeSize;
-    
+
+    UIElement() = default;
     UIElement(const std::string& pName): name(pName) {}
     void Update(const float& deltaTime);
     

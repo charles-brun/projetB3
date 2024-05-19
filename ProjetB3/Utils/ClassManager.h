@@ -1,13 +1,12 @@
 ﻿#pragma once
 #include <map>
 #include "ClassType.h"
+#include "Singleton.h"
 
 class ClassManager
 {
 public:
-    static ClassManager* Instance; 
-    static ClassManager* Get();
-    static void Reset();
+    inline DECLARE_SINGLETON(ClassManager)
     ClassType* GetClass(const std::string& className, ClassType* parentClass);
     ClassType* GetClassByID(const int& ID) const;
 private:
